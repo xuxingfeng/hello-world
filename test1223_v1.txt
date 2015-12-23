@@ -1,0 +1,21 @@
+	/**
+	 * 导出excel
+	 * @param out
+	 */
+	public byte[] exportExcel(String[] titles, List<String[]> headers,
+            List<Object> datasets, ByteArrayOutputStream out) {
+		try {
+			for(int i=0; i<titles.length; i++){
+				editSheet(titles[i], headers.get(i), (Collection<Object>) datasets.get(i));
+			}
+			try {
+				workbook.write(out);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return out.toByteArray();
+	}
